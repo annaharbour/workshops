@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import com.pluralsight.model.Book;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
