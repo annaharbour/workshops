@@ -9,6 +9,7 @@
         <module name="FinancialCalculators" />
         <module name="NeighborhoodLibrary" />
         <module name="OnlineStore" />
+        <module name="CarDealership" />
       </profile>
     </annotationProcessing>
   </component>
