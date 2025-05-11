@@ -1,20 +1,19 @@
 package com.pluralsight.controller;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FileManager<T> implements DataManager<T> {
-    private String path;
     private String fileName;
 
-    public FileManager(String path, String fileName) {
-        this.path = path;
+    public FileManager(String fileName) {
         this.fileName = fileName;
     }
 
     protected List<String> readFile() {
+        System.out.println("Looking for file at: " + new File(this.fileName).getAbsolutePath());
+
         try (BufferedReader reader = new BufferedReader(new FileReader(this.fileName))) {
             List<String> lines = new ArrayList<>();
             String line;
@@ -23,19 +22,19 @@ public abstract class FileManager<T> implements DataManager<T> {
             }
             return lines;
         } catch (IOException e) {
-            System.err.println("Error reading from file: " + this.path + "/" + this.fileName + " - " + e.getMessage());
+            System.err.println("Error reading from file: " + e.getMessage());
             return new ArrayList<>();
         }
     }
 
     protected void writeFile(List<String> lines, String delimiter) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.of(path, fileName).toString()))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String line : lines) {
-                writer.write(line);
+                writer.write(line.replace(delimiter, System.lineSeparator()));
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error saving to file: " + this.path + "/" + this.fileName + e.getMessage());
+            System.err.println("Error saving to file: " + this.fileName + e.getMessage());
         }
     }
 }

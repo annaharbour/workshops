@@ -1,10 +1,9 @@
 package com.pluralsight;
-
-import com.pluralsight.models.Dealership;
+import com.pluralsight.ui.UserInterface;
 
 public class CarDealershipApp {
     public static void main(String[] args) {
-
-        System.out.println();
+        UserInterface userInterface = new UserInterface();
+        userInterface.run();
     }
 }

@@ -3,7 +3,6 @@ package com.pluralsight.models;
 public class Vehicle {
     private int vin;
     private int year;
-
     private String make;
     private String model;
     private String vehicleType;
@@ -90,14 +89,14 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "\n\nVEHICLE" +
+        return "\nVEHICLE" +
                 "\n\tVin: " + vin +
                 "\n\tYear: " + year +
                 "\n\tMake: '" + make + '\'' +
                 "\n\tModel: '" + model + '\'' +
                 "\n\tVehicle Type: '" + vehicleType + '\'' +
-                "\n\tcolor: '" + color + '\'' +
-                "\n\todometer: " + odometer +
-                "\n\tprice: " + price;
+                "\n\tColor: '" + color + '\'' +
+                "\n\tMileage: " + odometer +
+                "\n\tPrice: " + price;
     }
 }
