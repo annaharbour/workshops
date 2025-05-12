@@ -17,7 +17,7 @@ public class UserInterface {
     }
 
     private Dealership init() {
-        DealershipFileManager fileManager = new DealershipFileManager("data", "inventory.csv");
+        DealershipFileManager fileManager = new DealershipFileManager();
         dealership = fileManager.getDealership();
         return dealership;
     }
@@ -44,6 +44,7 @@ public class UserInterface {
         do {
             displayMenu();
             int choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
                 case 1 -> {
                     displayVehicles(getByPriceRequest(scanner, dealership));
@@ -134,7 +135,7 @@ public class UserInterface {
 
     public List<Vehicle> processGetByVehicleTypeRequest(Scanner scanner, Dealership dealership) {
         List<Vehicle> vehicles = new ArrayList<>();
-        System.out.println("Please enter color: ");
+        System.out.println("Please enter a vehicle type (SUV, car, truck, etc): ");
         String vehicleType = scanner.next().trim().toLowerCase();
         vehicles = dealership.getVehiclesByType(vehicleType);
         return vehicles;
@@ -166,19 +167,13 @@ public class UserInterface {
         System.out.print("Enter price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
-
-        Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
-        dealership.addVehicle(vehicle);
+        dealership.addVehicle(vin, year, make, model, vehicleType, color, odometer, price);
     }
 
     public void processRemoveVehicleRequest(Scanner scanner, Dealership dealership) {
         System.out.println("Enter vehicle vin: ");
         int vin = scanner.nextInt();
-        Vehicle vehicle = dealership.getAllVehicles().stream()
-                .filter(v -> v.getVin() == vin)
-                .findFirst()
-                .orElse(null);
         scanner.nextLine();
-        dealership.removeVehicle(vehicle);
+        dealership.removeVehicle(vin);
     }
 }
