@@ -30,7 +30,7 @@ public abstract class FileManager<T> implements DataManager<T> {
     protected void writeFile(List<String> lines, String delimiter) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String line : lines) {
-                writer.write(line.replace(delimiter, System.lineSeparator()));
+                writer.write(line);  
                 writer.newLine();
             }
         } catch (IOException e) {

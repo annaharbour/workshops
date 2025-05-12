@@ -11,14 +11,15 @@ import java.util.Scanner;
 public class UserInterface {
     //        TODO handle incorrect input ie year not 4 digits
     private Dealership dealership;
+    private DealershipFileManager dealershipCSVManager;
 
     public UserInterface() {
+        this.dealershipCSVManager = new DealershipFileManager();
         this.dealership = init();
     }
 
     private Dealership init() {
-        DealershipFileManager fileManager = new DealershipFileManager();
-        dealership = fileManager.getDealership();
+        dealership = dealershipCSVManager.getDealership();
         return dealership;
     }
 
@@ -65,7 +66,7 @@ public class UserInterface {
                     displayVehicles(processGetByVehicleTypeRequest(scanner, dealership));
                 }
                 case 7 -> {
-                    displayVehicles(processGetAllVehiclesRequest(scanner, dealership));
+                    displayVehicles(processGetAllVehiclesRequest(dealership));
                 }
                 case 8 -> {
                     processAddVehicleRequest(scanner, dealership);
@@ -142,7 +143,7 @@ public class UserInterface {
     }
 
 
-    public List<Vehicle> processGetAllVehiclesRequest(Scanner scanner, Dealership dealership) {
+    public List<Vehicle> processGetAllVehiclesRequest(Dealership dealership) {
         List<Vehicle> vehicles;
         vehicles = dealership.getAllVehicles();
         return vehicles;
@@ -168,6 +169,9 @@ public class UserInterface {
         double price = scanner.nextDouble();
         scanner.nextLine();
         dealership.addVehicle(vin, year, make, model, vehicleType, color, odometer, price);
+//        DealershipFileManager fileManager = new DealershipFileManager();
+        dealershipCSVManager.saveDealership(dealership);
+        System.out.println("Dealership data saved successfully.");
     }
 
     public void processRemoveVehicleRequest(Scanner scanner, Dealership dealership) {
@@ -175,5 +179,8 @@ public class UserInterface {
         int vin = scanner.nextInt();
         scanner.nextLine();
         dealership.removeVehicle(vin);
+//        DealershipFileManager fileManager = new DealershipFileManager();
+        dealershipCSVManager.saveDealership(dealership);
+        System.out.println("Dealership data saved successfully.");
     }
 }
