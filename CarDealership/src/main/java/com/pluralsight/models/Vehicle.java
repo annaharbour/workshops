@@ -97,6 +97,6 @@ public class Vehicle {
                 "\n\tVehicle Type: '" + vehicleType + '\'' +
                 "\n\tColor: '" + color + '\'' +
                 "\n\tMileage: " + odometer +
-                "\n\tPrice: " + price;
+                "\n\tPrice: $" + String.format("%.2f", price);
     }
 }

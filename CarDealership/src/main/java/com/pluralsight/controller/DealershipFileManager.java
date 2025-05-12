@@ -9,7 +9,7 @@ import java.util.List;
 public class DealershipFileManager extends FileManager<Dealership> {
     private final String delimiter = ",";
 
-    public DealershipFileManager(String path, String fileName) {
+    public DealershipFileManager() {
         super("C:\\Users\\Anna Harbour\\Documents\\Coding\\pluralsight\\workshops\\CarDealership\\src\\main\\java" +
                 "\\com\\pluralsight\\data\\inventory.csv");
     }
@@ -36,8 +36,8 @@ public class DealershipFileManager extends FileManager<Dealership> {
                 int miles = Integer.parseInt(parts[6]);
                 double cost = Double.parseDouble(parts[7]);
                 // Add vehicles to dealership model
-                Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, miles, cost);
-                dealership.addVehicle(vehicle);
+//                Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, miles, cost);
+                dealership.addVehicle(vin, year, make, model, vehicleType, color, miles, cost);
             }
         }
         return dealership;
