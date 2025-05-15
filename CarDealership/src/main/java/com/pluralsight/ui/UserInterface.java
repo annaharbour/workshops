@@ -1,6 +1,6 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.controller.DealershipFileManager;
+import com.pluralsight.data.DealershipFileManager;
 import com.pluralsight.models.Dealership;
 import com.pluralsight.models.Vehicle;
 
