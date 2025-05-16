@@ -1,4 +1,4 @@
-package com.pluralsight.controller;
+package com.pluralsight.data;
 
 import com.pluralsight.models.Dealership;
 import com.pluralsight.models.Vehicle;
@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealershipFileManager extends FileManager<Dealership> {
-    private final String delimiter = ",";
+    private final String delimiter = "|";
 
     public DealershipFileManager() {
-        super("C:\\Users\\Anna Harbour\\Documents\\Coding\\pluralsight\\workshops\\CarDealership\\src\\main\\java" +
-                "\\com\\pluralsight\\data\\inventory.csv");
+        super("CarDealership\\data\\inventory.csv");
     }
-
+@Override
     public Dealership load() {
         //read csv
         List<String> lines = readFile();
@@ -25,7 +24,7 @@ public class DealershipFileManager extends FileManager<Dealership> {
         Dealership dealership = new Dealership(dealershipName, dealershipAddress, dealershipPhone);
         //populate the inventory with list of vehicles
         for (String line : lines.subList(3, lines.size())) {
-            String[] parts = line.split(delimiter);
+            String[] parts = line.split("\\" + delimiter);
             if (parts.length == 8) {
                 int vin = Integer.parseInt(parts[0]);
                 int year = Integer.parseInt(parts[1]);
@@ -35,14 +34,12 @@ public class DealershipFileManager extends FileManager<Dealership> {
                 String color = parts[5];
                 int miles = Integer.parseInt(parts[6]);
                 double cost = Double.parseDouble(parts[7]);
-                // Add vehicles to dealership model
-//                Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, miles, cost);
                 dealership.addVehicle(vin, year, make, model, vehicleType, color, miles, cost);
             }
         }
         return dealership;
     }
-
+@Override
     public void save(Dealership dealership) {
         List<String> lines = new ArrayList<>();
         lines.add("Dealership Name,Address,Phone");
@@ -54,13 +51,5 @@ public class DealershipFileManager extends FileManager<Dealership> {
                     vehicle.getOdometer() + delimiter + vehicle.getPrice());
         }
         writeFile(lines, delimiter);
-    }
-
-    public Dealership getDealership() {
-        return load();
-    }
-
-    public void saveDealership(Dealership dealership) {
-        save(dealership);
     }
 }

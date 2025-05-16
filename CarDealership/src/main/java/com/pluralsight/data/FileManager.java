@@ -1,4 +1,4 @@
-package com.pluralsight.controller;
+package com.pluralsight.data;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,8 +12,6 @@ public abstract class FileManager<T> implements DataManager<T> {
     }
 
     protected List<String> readFile() {
-        System.out.println("Looking for file at: " + new File(this.fileName).getAbsolutePath());
-
         try (BufferedReader reader = new BufferedReader(new FileReader(this.fileName))) {
             List<String> lines = new ArrayList<>();
             String line;
@@ -30,7 +28,7 @@ public abstract class FileManager<T> implements DataManager<T> {
     protected void writeFile(List<String> lines, String delimiter) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String line : lines) {
-                writer.write(line);  
+                writer.write(line);
                 writer.newLine();
             }
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package com.pluralsight.controller;
+package com.pluralsight.data;
 
 //generic DataManager interface
 public interface DataManager<T> {
