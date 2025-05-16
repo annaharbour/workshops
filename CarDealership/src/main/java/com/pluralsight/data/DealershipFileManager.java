@@ -12,7 +12,7 @@ public class DealershipFileManager extends FileManager<Dealership> {
     public DealershipFileManager() {
         super("CarDealership\\data\\inventory.csv");
     }
-
+@Override
     public Dealership load() {
         //read csv
         List<String> lines = readFile();
@@ -39,7 +39,7 @@ public class DealershipFileManager extends FileManager<Dealership> {
         }
         return dealership;
     }
-
+@Override
     public void save(Dealership dealership) {
         List<String> lines = new ArrayList<>();
         lines.add("Dealership Name,Address,Phone");
@@ -51,13 +51,5 @@ public class DealershipFileManager extends FileManager<Dealership> {
                     vehicle.getOdometer() + delimiter + vehicle.getPrice());
         }
         writeFile(lines, delimiter);
-    }
-
-    public Dealership getDealership() {
-        return load();
-    }
-
-    public void saveDealership(Dealership dealership) {
-        save(dealership);
     }
 }
