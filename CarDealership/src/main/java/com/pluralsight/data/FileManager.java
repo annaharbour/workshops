@@ -35,4 +35,16 @@ public abstract class FileManager<T> implements DataManager<T> {
             System.err.println("Error saving to file: " + this.fileName + e.getMessage());
         }
     }
+
+    protected void appendFile(List<String> lines, String delimiter){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error saving to file: " + this.fileName + e.getMessage());
+        }
+
+    }
 }

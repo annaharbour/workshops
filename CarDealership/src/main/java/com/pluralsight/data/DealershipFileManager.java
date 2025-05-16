@@ -50,9 +50,9 @@ public class DealershipFileManager extends FileManager<Dealership> {
     @Override
     public void save(Dealership dealership) {
         List<String> lines = new ArrayList<>();
-        lines.add("Dealership Name,Address,Phone");
+        lines.add("Dealership Name|Address|Phone");
         lines.add(dealership.getName() + delimiter + dealership.getAddress() + delimiter + dealership.getPhone());
-        lines.add("Vin,Year,Make,Model,Vehicle Type,Color,Miles,Cost");
+        lines.add("Vin|Year|Make|Model|Vehicle Type|Color|Miles|Cost");
         for (Vehicle vehicle : dealership.getAllVehicles()) {
             lines.add(vehicle.getVin() + delimiter + vehicle.getYear() + delimiter + vehicle.getMake() + delimiter +
                     vehicle.getModel() + delimiter + vehicle.getVehicleType() + delimiter + vehicle.getColor() + delimiter +

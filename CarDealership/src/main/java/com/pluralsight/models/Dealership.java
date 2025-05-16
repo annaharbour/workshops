@@ -1,5 +1,6 @@
 package com.pluralsight.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,14 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
-        return filterVehicles(vehicle -> vehicle.getPrice() >= min && vehicle.getPrice() <= max);
+        return filterVehicles(
+                vehicle -> vehicle.getPrice().compareTo(BigDecimal.valueOf(min)) > 0 && vehicle.getPrice().compareTo(
+                        BigDecimal.valueOf(max)) <= 0);
     }
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
-        return filterVehicles(vehicle -> vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model));
+        return filterVehicles(
+                vehicle -> vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model));
     }
 
     public List<Vehicle> getVehiclesByYear(int min, int max) {
