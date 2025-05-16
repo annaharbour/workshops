@@ -8,14 +8,13 @@ public abstract class Contract {
     private String customerEmail;
     private Vehicle vehicleSold;
     private BigDecimal price;
-    private BigDecimal monthlyPayment;
 
     public Contract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.vehicleSold = vehicleSold;
-        this.price = BigDecimal.valueOf(vehicleSold.getPrice());
+        this.price = this.vehicleSold.getPrice();
     }
 
     public String getDate() {
@@ -50,11 +49,11 @@ public abstract class Contract {
         this.vehicleSold = vehicleSold;
     }
 
-    public BigDecimal getTotalPrice(){
-        return new BigDecimal(0);
+    public BigDecimal getOriginalPrice(){
+        return this.price;
     }
 
-    public BigDecimal getMonthlyPayment(){
-        return new BigDecimal(0);
-    }
+    public abstract BigDecimal getTotalPrice();
+
+    public abstract BigDecimal getMonthlyPayment();
 }
