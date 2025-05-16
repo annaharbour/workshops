@@ -1,15 +1,16 @@
 package com.pluralsight.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public abstract class Contract {
-    private String date;
+    private LocalDate date;
     private String customerName;
     private String customerEmail;
     private Vehicle vehicleSold;
     private BigDecimal price;
 
-    public Contract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
+    public Contract(LocalDate date, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
@@ -17,11 +18,11 @@ public abstract class Contract {
         this.price = this.vehicleSold.getPrice();
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

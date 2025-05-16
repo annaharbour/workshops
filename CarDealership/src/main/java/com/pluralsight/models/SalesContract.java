@@ -2,6 +2,7 @@ package com.pluralsight.models;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public class SalesContract extends Contract {
     private BigDecimal salesTaxAmount;
@@ -9,7 +10,7 @@ public class SalesContract extends Contract {
     private BigDecimal processingFee;
     private boolean isFinanced;
 
-    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold,
+    public SalesContract(LocalDate date, String customerName, String customerEmail, Vehicle vehicleSold,
                          boolean isFinanced) {
         super(date, customerName, customerEmail, vehicleSold);
         this.salesTaxAmount = BigDecimal.valueOf(.05);

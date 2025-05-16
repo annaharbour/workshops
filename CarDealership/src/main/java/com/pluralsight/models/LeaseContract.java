@@ -2,12 +2,13 @@ package com.pluralsight.models;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public class LeaseContract extends Contract {
     private BigDecimal expectedEndingValue;
     private BigDecimal leaseFee;
 
-    public LeaseContract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
+    public LeaseContract(LocalDate date, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(date, customerName, customerEmail, vehicleSold);
         this.expectedEndingValue = this.getOriginalPrice().multiply(BigDecimal.valueOf(0.5));
         this.leaseFee = this.getOriginalPrice().multiply(BigDecimal.valueOf(0.07));

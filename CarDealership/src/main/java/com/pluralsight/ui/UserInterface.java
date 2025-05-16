@@ -1,12 +1,11 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.data.ContractFileManager;
 import com.pluralsight.data.DataManager;
 import com.pluralsight.data.DealershipFileManager;
-import com.pluralsight.data.FileManager;
-import com.pluralsight.models.Dealership;
-import com.pluralsight.models.Vehicle;
+import com.pluralsight.models.*;
 
-import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,43 +13,41 @@ import java.util.Scanner;
 public class UserInterface {
     //        TODO handle incorrect input ie year not 4 digits
     private Dealership dealership;
-//    private DealershipFileManager dealershipManager;
+    //    private DealershipFileManager dealershipManager;
     private DataManager<Dealership> dealershipManager;
+    private DataManager<Contract> contractManager;
+
     public UserInterface() {
-        this.dealershipManager = new DealershipFileManager() {
-        };
+        this.dealershipManager = new DealershipFileManager();
         this.dealership = init();
+
+        this.contractManager = new ContractFileManager();
     }
 
     private Dealership init() {
         dealership = dealershipManager.load();
         return dealership;
     }
-//    public UserInterface() {
-//        this.dealershipManager = new DealershipFileManager() {
-//        };
-//        this.dealership = init();
-//    }
-//
-//    private Dealership init() {
-//        dealership = dealershipManager.load();
-//        return dealership;
-//    }
 
     public void displayMenu() {
-        String[] menuOptions = {"Find vehicles within price range", "Find vehicles by make / model", "Find " +
-                "vehicles by year range", "Find vehicles by color", "Find vehicles by mileage range", "Find vehicles " +
-                "by type (truck, SUV, van, car)", "Get all vehicles", "Add a vehicle", "Remove a vehicle", "Quit"};
+        String[] menuOptions = {"1) Find vehicles within price range", "2) Find vehicles by make / model", "3) Find " +
+                "vehicles by year range", "4) Find vehicles by color", "5) Find vehicles by mileage range", "6) Find " +
+                "vehicles " +
+                "by type (truck, SUV, van, car)", "7) Get all vehicles", "8) Add a vehicle", "9) Remove a vehicle",
+                "10) " +
+                        "Lease or Buy a Vehicle " +
+                        "contract", "0) Quit"};
         System.out.println("Please select from the following menu options: ");
         for (int i = 0; i < menuOptions.length; i++) {
-            System.out.println("\t" + (i + 1) + ". " + menuOptions[i]);
+            System.out.println("\t" + menuOptions[i]);
         }
     }
 
-    public void displayVehicles(List<Vehicle> vehicles){
-        for(Vehicle vehicle: vehicles){
+    public void displayVehicles(List<Vehicle> vehicles) {
+        for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle);
-        };
+        }
+        ;
     }
 
     public void run() {
@@ -89,9 +86,15 @@ public class UserInterface {
                     processRemoveVehicleRequest(scanner, dealership);
                 }
                 case 10 -> {
+                    addContract(scanner, dealership);
+                }
+                case 0 -> {
                     System.out.println("Exiting...");
                     running = false;
                     System.exit(0);
+                }
+                default -> {
+                    System.out.println("Incorrect option");
                 }
             }
         } while (running);
@@ -193,8 +196,40 @@ public class UserInterface {
         int vin = scanner.nextInt();
         scanner.nextLine();
         dealership.removeVehicle(vin);
-//        DealershipFileManager fileManager = new DealershipFileManager();
         dealershipManager.save(dealership);
         System.out.println("Dealership data saved successfully.");
+    }
+
+    public void addContract(Scanner scanner, Dealership dealership) {
+        System.out.println("Enter your name: ");
+        String customerName = scanner.nextLine();
+        System.out.println("Enter your email: ");
+        String customerEmail = scanner.nextLine();
+        boolean isValid = customerEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+        if (!isValid) {
+            throw new IllegalStateException("Invalid email");
+        }
+        ;
+        System.out.println("Enter vin: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        Vehicle vehicle = dealership.getVehicleByVin(vin);
+        System.out.println("Would you like to lease or buy outright? Type lease or buy: ");
+        String leaseOrBuy = scanner.nextLine();
+        if (leaseOrBuy.equalsIgnoreCase("LEASE")) {
+            LeaseContract leaseContract = new LeaseContract(LocalDate.now(), customerName, customerEmail, vehicle);
+            contractManager.save(leaseContract);
+        } else if (leaseOrBuy.equalsIgnoreCase("BUY")) {
+            System.out.println("Would you like to finance? y/n");
+            String financed = scanner.nextLine();
+            boolean isFinanced = false;
+            if (financed.equalsIgnoreCase("y")) isFinanced = true;
+            SalesContract salesContract = new SalesContract(LocalDate.now(), customerName, customerEmail, vehicle,
+                    isFinanced);
+            contractManager.save(salesContract);
+        } else {
+            throw new IllegalStateException("Must choose lease or buy");
+        }
+
     }
 }

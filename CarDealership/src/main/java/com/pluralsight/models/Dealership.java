@@ -71,6 +71,14 @@ public class Dealership {
         }
     }
 
+    public Vehicle getVehicleByVin(int vin) {
+        List<Vehicle> vehicles = filterVehicles(vehicle -> vehicle.getVin() == vin);
+        if (!vehicles.isEmpty()) {
+            return vehicles.get(0);
+        }
+        else return null;
+    }
+
     public String getName() {
         return name;
     }
