@@ -1,5 +1,7 @@
 package com.pluralsight.models;
 
+import java.math.BigDecimal;
+
 public class Vehicle {
     private int vin;
     private int year;
@@ -78,8 +80,8 @@ public class Vehicle {
         this.odometer = odometer;
     }
 
-    public double getPrice() {
-        return price;
+    public BigDecimal getPrice() {
+        return new BigDecimal(price);
     }
 
     public void setPrice(double price) {

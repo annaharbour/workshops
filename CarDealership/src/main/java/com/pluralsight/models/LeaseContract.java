@@ -4,37 +4,32 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class LeaseContract extends Contract {
-    private BigDecimal originalPrice;
     private BigDecimal expectedEndingValue;
     private BigDecimal leaseFee;
 
-    public LeaseContract(String date, String customerName, String customerEmail, Vehicle vehicleSold,
-                         BigDecimal originalPrice) {
+    public LeaseContract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(date, customerName, customerEmail, vehicleSold);
-        this.originalPrice = originalPrice;
-        this.expectedEndingValue = originalPrice.multiply(BigDecimal.valueOf(0.5));
-        this.leaseFee = originalPrice.multiply(BigDecimal.valueOf(0.07));
-    }
-
-    public BigDecimal getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(BigDecimal originalPrice) {
-        this.originalPrice = originalPrice;
+        this.expectedEndingValue = this.getOriginalPrice().multiply(BigDecimal.valueOf(0.5));
+        this.leaseFee = this.getOriginalPrice().multiply(BigDecimal.valueOf(0.07));
     }
 
     public BigDecimal getExpectedEndingValue() {
         return expectedEndingValue;
     }
 
+
     public BigDecimal getLeaseFee() {
         return leaseFee;
     }
 
+    public void setLeaseFee(BigDecimal leaseFee) {
+        this.leaseFee = leaseFee;
+    }
+
+
     @Override
     public BigDecimal getTotalPrice() {
-        return originalPrice.add(leaseFee);
+        return this.getOriginalPrice().add(leaseFee);
     }
 
     @Override
