@@ -218,6 +218,7 @@ public class UserInterface {
         String leaseOrBuy = scanner.nextLine();
         if (leaseOrBuy.equalsIgnoreCase("LEASE")) {
             LeaseContract leaseContract = new LeaseContract(LocalDate.now(), customerName, customerEmail, vehicle);
+            System.out.println(leaseContract);
             contractManager.save(leaseContract);
         } else if (leaseOrBuy.equalsIgnoreCase("BUY")) {
             System.out.println("Would you like to finance? y/n");
@@ -227,6 +228,9 @@ public class UserInterface {
             SalesContract salesContract = new SalesContract(LocalDate.now(), customerName, customerEmail, vehicle,
                     isFinanced);
             contractManager.save(salesContract);
+            System.out.println(salesContract);
+            dealership.removeVehicle(vin);
+            dealershipManager.save(dealership);
         } else {
             throw new IllegalStateException("Must choose lease or buy");
         }
