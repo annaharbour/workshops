@@ -1,4 +1,4 @@
-package com.pluralsight.data;
+package com.pluralsight.dealership.dao;
 
 import java.io.*;
 import java.util.ArrayList;

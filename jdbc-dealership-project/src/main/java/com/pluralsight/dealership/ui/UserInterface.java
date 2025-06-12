@@ -1,9 +1,9 @@
 package com.pluralsight.dealership.ui;
 
-import com.pluralsight.dao.ContractFileManager;
-import com.pluralsight.dao.DataManager;
-import com.pluralsight.dao.DealershipFileManager;
-import com.pluralsight.models.*;
+import com.pluralsight.dealership.dao.ContractFileManager;
+import com.pluralsight.dealership.dao.DataManager;
+import com.pluralsight.dealership.dao.DealershipFileManager;
+import com.pluralsight.dealership.models.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

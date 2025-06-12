@@ -1,6 +1,4 @@
-package com.pluralsight.data;
-
-import java.util.List;
+package com.pluralsight.dealership.dao;
 
 //generic DataManager interface
 public interface DataManager<T> {

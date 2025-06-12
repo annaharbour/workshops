@@ -1,7 +1,7 @@
-package com.pluralsight.data;
+package com.pluralsight.dealership.dao;
 
-import com.pluralsight.models.Dealership;
-import com.pluralsight.models.Vehicle;
+import com.pluralsight.dealership.models.Dealership;
+import com.pluralsight.dealership.models.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class DealershipFileManager extends FileManager<Dealership> {
     private final String delimiter = "|";
 
     public DealershipFileManager() {
-        super("CarDealership\\data\\inventory.csv");
+        super("data\\inventory.csv");
     }
 
     @Override

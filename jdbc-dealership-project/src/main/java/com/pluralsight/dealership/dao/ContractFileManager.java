@@ -1,9 +1,9 @@
-package com.pluralsight.data;
+package com.pluralsight.dealership.dao;
 
-import com.pluralsight.models.Contract;
-import com.pluralsight.models.LeaseContract;
-import com.pluralsight.models.SalesContract;
-import com.pluralsight.models.Vehicle;
+import com.pluralsight.dealership.models.Contract;
+import com.pluralsight.dealership.models.LeaseContract;
+import com.pluralsight.dealership.models.SalesContract;
+import com.pluralsight.dealership.models.Vehicle;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
