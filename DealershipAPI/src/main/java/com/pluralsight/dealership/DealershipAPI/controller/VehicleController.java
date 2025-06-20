@@ -20,36 +20,37 @@ public class VehicleController {
         return dao.getAllVehicles();
     }
 
-    @GetMapping("/price/min/{minPrice}/max/{maxPrice}")
+
+    @GetMapping("/price")
     public List<Vehicle> getByPrice(@RequestParam("minPrice") double minPrice,
                                     @RequestParam("maxPrice") double maxPrice) {
         return dao.getByPrice(minPrice, maxPrice);
     }
 
-    @GetMapping("/make/{make}/model/{model}")
+    @GetMapping("/makemodel")
     public List<Vehicle> getByMakeModel(@RequestParam("make") String make, @RequestParam("model") String model) {
         return dao.getByMakeModel(make, model);
     }
 
-    @GetMapping("/mileage/min/{minMiles}/max/{maxMiles}")
+    @GetMapping("/mileage")
     public List<Vehicle> getByMileage(@RequestParam("minMiles") int minMiles,
                                       @RequestParam("maxMiles") int maxMiles) {
         return dao.getByMileage(minMiles, maxMiles);
     }
 
-    @GetMapping("/year/min/{minYear}/max/{maxYear}")
+    @GetMapping("/year")
     public List<Vehicle> getByYear(@RequestParam("minYear") int minYear,
                                    @RequestParam("maxYear") int maxYear) {
         return dao.getByYear(minYear, maxYear);
     }
 
-    @GetMapping("/type/{type}")
+    @GetMapping("/type")
     public List<Vehicle> getByType(@RequestParam("type") String type) {
         return dao.getByType(type);
     }
 
 
-    @GetMapping("/color/{color}")
+    @GetMapping("/color")
     public List<Vehicle> getByColor(@RequestParam("color") String color) {
         return dao.getByColor(color);
     }

@@ -149,6 +149,7 @@ public class MySQLVehicleDao implements VehicleDao {
         return vehicles;
     }
 
+
     @Override
     public Vehicle updateVehicle(String vin, Vehicle vehicle) {
         String sqlQuery = "UPDATE vehicles SET vin = ?, year = ?, make = ?, model = ?, type = ?, color = ?, mileage =" +

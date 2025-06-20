@@ -12,7 +12,6 @@ public interface VehicleDao {
     List<Vehicle> getByMileage(int minMileage, int maxMileage);
     List<Vehicle> getByType(String type);
     List<Vehicle> getByColor(String color);
-
     Vehicle updateVehicle(String vin, Vehicle vehicle);
     Vehicle addVehicle(Vehicle vehicle);
 
