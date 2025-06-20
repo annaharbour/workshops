@@ -3,10 +3,11 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
-@Configuration
+@Repository
 public class MySqlConfig {
     private BasicDataSource basicDataSource;
     @Bean

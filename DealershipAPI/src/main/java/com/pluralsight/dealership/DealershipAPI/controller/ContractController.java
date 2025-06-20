@@ -1,7 +1,5 @@
 package com.pluralsight.dealership.DealershipAPI.controller;
-
 import com.pluralsight.dealership.DealershipAPI.dao.ContractDao;
-import com.pluralsight.dealership.DealershipAPI.model.Contract;
 import com.pluralsight.dealership.DealershipAPI.model.Lease;
 import com.pluralsight.dealership.DealershipAPI.model.Sale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +51,13 @@ public class ContractController {
         return dao.addSale(sale);
     }
 
-    @PutMapping("/leases/{id}")
+    @PutMapping("/sales/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Lease updateSale(@RequestParam int id, @RequestBody Lease lease) {
         return dao.updateSale(id, lease);
     }
 
-    @PutMapping("/sales/{id}")
+    @PutMapping("/leases/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Lease updateLease(@RequestParam int id, @RequestBody Sale sale) {
         return dao.updateLease(id, sale);
@@ -70,7 +68,7 @@ public class ContractController {
     public void deleteSale(int id) {
         dao.deleteSale(id);
     }
-    @DeleteMapping("/sales/{id}")
+    @DeleteMapping("/leases/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLease(int id) {
         dao.deleteLease(id);

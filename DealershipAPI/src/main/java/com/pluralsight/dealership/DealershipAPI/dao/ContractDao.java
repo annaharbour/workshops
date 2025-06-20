@@ -3,6 +3,7 @@ package com.pluralsight.dealership.DealershipAPI.dao;
 import com.pluralsight.dealership.DealershipAPI.model.Contract;
 import com.pluralsight.dealership.DealershipAPI.model.Lease;
 import com.pluralsight.dealership.DealershipAPI.model.Sale;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

@@ -18,4 +18,14 @@ public class Sale extends Contract {
     public void setFinanced(boolean financed) {
         isFinanced = financed;
     }
+
+    @Override
+    public double getTotalPrice() {
+        return 0;
+    }
+
+    @Override
+    public double getMonthlyPayment() {
+        return 0;
+    }
 }
