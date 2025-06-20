@@ -15,7 +15,7 @@ public class VehicleController {
     @Autowired
     private VehicleDao dao;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Vehicle> getAllVehicles() {
         return dao.getAllVehicles();
     }

@@ -24,7 +24,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getAllVehicles() {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle";
+        String sql = "SELECT * FROM vehicles";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -40,7 +40,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByPrice(double minPrice, double maxPrice) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE price BETWEEN ? AND ?";
+        String sql = "SELECT * FROM vehicles WHERE price BETWEEN ? AND ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setDouble(1, minPrice);
@@ -59,7 +59,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByMakeModel(String make, String model) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE make = ? AND model = ?";
+        String sql = "SELECT * FROM vehicles WHERE make = ? AND model = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, make);
@@ -78,7 +78,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByYear(int minYear, int maxYear) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE vehicle_year BETWEEN ? AND ?";
+        String sql = "SELECT * FROM vehicles WHERE vehicle_year BETWEEN ? AND ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, minYear);
@@ -97,7 +97,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByMileage(int minMileage, int maxMileage) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE mileage BETWEEN ? AND ?";
+        String sql = "SELECT * FROM vehicles WHERE mileage BETWEEN ? AND ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, minMileage);
@@ -116,7 +116,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByType(String type) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE vehicle_type = ?";
+        String sql = "SELECT * FROM vehicles WHERE vehicle_type = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, type);
@@ -134,7 +134,7 @@ public class MySQLVehicleDao implements VehicleDao {
     @Override
     public List<Vehicle> getByColor(String color) {
         List<Vehicle> vehicles = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle WHERE color = ?";
+        String sql = "SELECT * FROM vehicles WHERE color = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, color);
@@ -151,7 +151,7 @@ public class MySQLVehicleDao implements VehicleDao {
 
     @Override
     public Vehicle updateVehicle(String vin, Vehicle vehicle) {
-        String sqlQuery = "UPDATE vehicle SET vin = ?, year = ?, make = ?, model = ?, type = ?, color = ?, mileage =" +
+        String sqlQuery = "UPDATE vehicles SET vin = ?, year = ?, make = ?, model = ?, type = ?, color = ?, mileage =" +
                 " ?, price = ?"
                 +
                 "WHERE vin = ?";
@@ -173,7 +173,7 @@ public class MySQLVehicleDao implements VehicleDao {
 
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
-        String sqlQuery = "INSERT INTO vehicle (vin, year, make, model, type, color, odometer, price, sold) " +
+        String sqlQuery = "INSERT INTO vehicles (vin, year, make, model, type, color, odometer, price, sold) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -193,7 +193,7 @@ public class MySQLVehicleDao implements VehicleDao {
 
     @Override
     public void deleteVehicle(String vin) {
-        String sqlQuery = "DELETE FROM vehicle WHERE vin = ?";
+        String sqlQuery = "DELETE FROM vehicles WHERE vin = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setString(1, vin);

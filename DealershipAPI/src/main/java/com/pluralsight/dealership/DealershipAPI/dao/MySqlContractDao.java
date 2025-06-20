@@ -51,7 +51,7 @@ public class MySqlContractDao implements ContractDao {
 
     @Override
     public List<Lease> getAllLeases() {
-        String query = "SELECT * FROM sales_contracts";
+        String query = "SELECT * FROM lease_contracts";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -99,7 +99,7 @@ public class MySqlContractDao implements ContractDao {
     @Override
     public Lease updateLease(int id, Sale sale) {
         // Probably a logic error: updating a lease using a Sale object? But assuming typo:
-        String query = "UPDATE sales_contracts SET name = ?, email = ?, phone = ?, VIN = ?, financed = ? WHERE id = ?";
+        String query = "UPDATE lease_contracts SET name = ?, email = ?, phone = ?, VIN = ?, financed = ? WHERE id = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, sale.getCustomer());
